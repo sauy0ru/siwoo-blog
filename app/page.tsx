@@ -5,12 +5,16 @@ export default async function Home() {
   const { data: posts, error } = await supabase
     .from("posts")
     .select("*")
-    .order("id", { ascending: false });
+    .order("created_at", { ascending: false });
 
 
   if (error) {
     console.error(error);
-    return <div>글을 불러오는 중 오류가 발생했습니다.</div>;
+    return (
+      <div>
+        글을 불러오는 중 오류가 발생했습니다.
+      </div>
+    );
   }
 
 
@@ -31,21 +35,31 @@ export default async function Home() {
 
 
 
-  function formatDate(date: string) {
-    return new Date(date).toLocaleDateString("ko-KR", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+  function formatDate(date?: string) {
+
+    if (!date) return "";
+
+    return new Date(date).toLocaleDateString(
+      "ko-KR",
+      {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }
+    );
+
   }
 
 
 
+
   return (
+
     <main className="mx-auto max-w-5xl p-10">
 
 
       {/* 최신 글 */}
+
       <section className="mb-20">
 
 
@@ -57,7 +71,16 @@ export default async function Home() {
 
         <Link href={`/post/${latestPost.id}`}>
 
-          <article className="mt-5 overflow-hidden rounded-3xl bg-white shadow-lg transition hover:-translate-y-2 hover:shadow-2xl">
+          <article className="
+            mt-5
+            overflow-hidden
+            rounded-3xl
+            bg-white
+            shadow-lg
+            transition
+            hover:-translate-y-2
+            hover:shadow-2xl
+          ">
 
 
             {latestPost.image && (
@@ -67,7 +90,11 @@ export default async function Home() {
                 <img
                   src={latestPost.image}
                   alt={latestPost.title}
-                  className="max-h-[700px] w-auto object-contain"
+                  className="
+                    max-h-[700px]
+                    w-auto
+                    object-contain
+                  "
                 />
 
               </div>
@@ -76,14 +103,19 @@ export default async function Home() {
 
 
 
-
             <div className="p-8">
 
 
-              <span className="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-600">
+              <span className="
+                rounded-full
+                bg-blue-100
+                px-3
+                py-1
+                text-sm
+                text-blue-600
+              ">
                 {latestPost.category}
               </span>
-
 
 
 
@@ -93,11 +125,9 @@ export default async function Home() {
 
 
 
-
               <p className="mt-4 text-lg text-gray-600">
                 {latestPost.description}
               </p>
-
 
 
 
@@ -113,6 +143,7 @@ export default async function Home() {
 
           </article>
 
+
         </Link>
 
 
@@ -122,9 +153,9 @@ export default async function Home() {
 
 
 
-
-
       {/* 최근 글 */}
+
+
       <section>
 
 
@@ -135,12 +166,10 @@ export default async function Home() {
 
 
 
-
         <div className="grid gap-8 md:grid-cols-2">
 
 
-
-          {otherPosts.map((post) => (
+          {otherPosts.map((post)=>(
 
 
             <Link
@@ -149,7 +178,16 @@ export default async function Home() {
             >
 
 
-              <article className="overflow-hidden rounded-2xl bg-white shadow transition hover:-translate-y-2 hover:shadow-xl">
+              <article className="
+                overflow-hidden
+                rounded-2xl
+                bg-white
+                shadow
+                transition
+                hover:-translate-y-2
+                hover:shadow-xl
+              ">
+
 
 
                 {post.image && (
@@ -159,7 +197,11 @@ export default async function Home() {
                     <img
                       src={post.image}
                       alt={post.title}
-                      className="h-80 w-full object-contain"
+                      className="
+                        h-80
+                        w-full
+                        object-contain
+                      "
                     />
 
                   </div>
@@ -169,13 +211,20 @@ export default async function Home() {
 
 
 
+
                 <div className="p-6">
 
 
-                  <span className="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-600">
+                  <span className="
+                    rounded-full
+                    bg-blue-100
+                    px-3
+                    py-1
+                    text-sm
+                    text-blue-600
+                  ">
                     {post.category}
                   </span>
-
 
 
 
@@ -187,11 +236,9 @@ export default async function Home() {
 
 
 
-
                   <p className="mt-3 text-gray-600">
                     {post.description}
                   </p>
-
 
 
 
@@ -202,17 +249,13 @@ export default async function Home() {
 
 
 
-
                 </div>
-
 
 
               </article>
 
 
-
             </Link>
-
 
 
           ))}
@@ -224,7 +267,7 @@ export default async function Home() {
       </section>
 
 
-
     </main>
+
   );
 }
