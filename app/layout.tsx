@@ -73,6 +73,7 @@ export default function RootLayout({
           min-h-screen
           flex
           bg-white
+          relative
         "
       >
 
@@ -84,7 +85,7 @@ export default function RootLayout({
             onClick={() => setOpen(true)}
             className="
               md:hidden
-              fixed
+              absolute
               top-5
               left-5
               z-50
@@ -182,7 +183,7 @@ export default function RootLayout({
               <p
                 className="
                   text-xs
-                  tracking-[0.35em}
+                  tracking-[0.35em]
                   text-gray-400
                   uppercase
                 "
@@ -215,10 +216,7 @@ export default function RootLayout({
 
 
             </div>
-
-
-
-            <div
+                        <div
               className="
                 mb-10
                 flex
@@ -274,7 +272,10 @@ export default function RootLayout({
 
 
           </div>
-                    <nav className="space-y-3">
+
+
+
+          <nav className="space-y-3">
 
 
             <Link
@@ -284,9 +285,6 @@ export default function RootLayout({
             >
               HOME
             </Link>
-
-
-
 
 
             <p
@@ -304,8 +302,6 @@ export default function RootLayout({
 
 
 
-
-
             <Link
               href="/category/all"
               className={linkClass("/category/all")}
@@ -313,8 +309,6 @@ export default function RootLayout({
             >
               전체 게시글
             </Link>
-
-
 
 
 
@@ -328,8 +322,6 @@ export default function RootLayout({
 
 
 
-
-
             <Link
               href="/category/그림"
               className={linkClass("/category/그림")}
@@ -340,8 +332,6 @@ export default function RootLayout({
 
 
 
-
-
             <Link
               href="/category/사진"
               className={linkClass("/category/사진")}
@@ -349,7 +339,6 @@ export default function RootLayout({
             >
               사진
             </Link>
-
 
 
 
@@ -372,7 +361,6 @@ export default function RootLayout({
 
 
 
-
             <div
               className="
                 flex
@@ -381,73 +369,59 @@ export default function RootLayout({
               "
             >
 
-
-              <span
-                className="
-                  rounded-full
-                  border
-                  border-gray-200
-                  px-3
-                  py-1
-                  text-xs
-                  text-gray-600
-                "
-              >
+              <span className="
+                rounded-full
+                border
+                border-gray-200
+                px-3
+                py-1
+                text-xs
+                text-gray-600
+              ">
                 야구
               </span>
 
 
-
-              <span
-                className="
-                  rounded-full
-                  border
-                  border-gray-200
-                  px-3
-                  py-1
-                  text-xs
-                  text-gray-600
-                "
-              >
+              <span className="
+                rounded-full
+                border
+                border-gray-200
+                px-3
+                py-1
+                text-xs
+                text-gray-600
+              ">
                 일상
               </span>
 
 
-
-              <span
-                className="
-                  rounded-full
-                  border
-                  border-gray-200
-                  px-3
-                  py-1
-                  text-xs
-                  text-gray-600
-                "
-              >
+              <span className="
+                rounded-full
+                border
+                border-gray-200
+                px-3
+                py-1
+                text-xs
+                text-gray-600
+              ">
                 미술
               </span>
 
 
-
-              <span
-                className="
-                  rounded-full
-                  border
-                  border-gray-200
-                  px-3
-                  py-1
-                  text-xs
-                  text-gray-600
-                "
-              >
+              <span className="
+                rounded-full
+                border
+                border-gray-200
+                px-3
+                py-1
+                text-xs
+                text-gray-600
+              ">
                 사진
               </span>
 
 
             </div>
-
-
 
 
 
@@ -459,8 +433,6 @@ export default function RootLayout({
             >
               ABOUT
             </Link>
-
-
 
 
 
@@ -477,14 +449,13 @@ export default function RootLayout({
 
 
 
-
-
         {/* 메인 */}
 
         <main
           className="
             flex-1
             p-5
+            pt-20
             md:p-12
             bg-white
           "
@@ -502,4 +473,4 @@ export default function RootLayout({
 
     </html>
   );
-}
+}git add .
