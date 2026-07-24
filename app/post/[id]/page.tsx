@@ -30,6 +30,19 @@ export default async function PostPage({
 
 
 
+  // 조회수 증가
+  const newViews = (post.views ?? 0) + 1;
+
+
+  await supabase
+    .from("posts")
+    .update({
+      views: newViews,
+    })
+    .eq("id", id);
+
+
+
   const date = new Date(post.created_at)
     .toLocaleDateString("ko-KR", {
       year: "numeric",
@@ -43,8 +56,6 @@ export default async function PostPage({
     <article className="max-w-5xl mx-auto px-10 py-16">
 
 
-
-      {/* 뒤로가기 */}
       <Link
         href="/"
         className="text-sm text-gray-500 hover:text-black"
@@ -55,14 +66,17 @@ export default async function PostPage({
 
 
 
-
-      {/* 카테고리 */}
       <div className="mt-10">
 
-        <span className="rounded-full bg-gray-100 px-4 py-2 text-sm text-gray-600">
-
+        <span className="
+          rounded-full
+          bg-gray-100
+          px-4
+          py-2
+          text-sm
+          text-gray-600
+        ">
           {post.category}
-
         </span>
 
       </div>
@@ -71,12 +85,13 @@ export default async function PostPage({
 
 
 
-
-      {/* 제목 */}
-      <h1 className="mt-8 text-6xl font-bold tracking-tight">
-
+      <h1 className="
+        mt-8
+        text-6xl
+        font-bold
+        tracking-tight
+      ">
         {post.title}
-
       </h1>
 
 
@@ -84,7 +99,6 @@ export default async function PostPage({
 
 
 
-      {/* 수정 삭제 버튼 */}
       <EditButtons id={post.id} />
 
 
@@ -92,13 +106,17 @@ export default async function PostPage({
 
 
 
-
-      {/* 날짜 */}
       <p className="mt-6 text-sm text-gray-400">
 
         {date}
+
         {" · "}
+
         Personal Archive
+
+        {" · "}
+
+        👁 {newViews}
 
       </p>
 
@@ -108,18 +126,27 @@ export default async function PostPage({
 
 
 
-      {/* 이미지 */}
       {post.image && (
 
-        <div className="mt-12 rounded-3xl bg-gray-50 p-5 flex justify-center">
-
+        <div className="
+          mt-12
+          rounded-3xl
+          bg-gray-50
+          p-5
+          flex
+          justify-center
+        ">
 
           <img
             src={post.image}
             alt={post.title}
-            className="max-h-[900px] w-auto object-contain rounded-2xl"
+            className="
+              max-h-[900px]
+              w-auto
+              object-contain
+              rounded-2xl
+            "
           />
-
 
         </div>
 
@@ -131,13 +158,18 @@ export default async function PostPage({
 
 
 
-      {/* 내용 */}
-      <div className="mt-12 text-lg leading-9 whitespace-pre-wrap text-gray-700">
+
+      <div className="
+        mt-12
+        text-lg
+        leading-9
+        whitespace-pre-wrap
+        text-gray-700
+      ">
 
         {post.description}
 
       </div>
-
 
 
 
