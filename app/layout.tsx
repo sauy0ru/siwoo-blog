@@ -5,6 +5,7 @@ import "./globals.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import Image from "next/image";
 import AuthMenu from "@/components/AuthMenu";
 import PopularPosts from "@/components/PopularPosts";
 
@@ -71,9 +72,13 @@ export default function RootLayout({
           flex
           bg-white
           relative
+          overflow-x-hidden
         "
       >
 
+
+
+        {/* 모바일 프로필 버튼 */}
 
 
         {!open && (
@@ -84,13 +89,17 @@ export default function RootLayout({
               fixed
               top-5
               left-5
-              z-50
+              z-[100]
+              pointer-events-auto
             "
           >
 
-            <img
+            <Image
               src="/profile.png"
               alt="profile"
+              width={48}
+              height={48}
+              priority
               className="
                 w-12
                 h-12
@@ -106,6 +115,11 @@ export default function RootLayout({
 
 
 
+
+
+        {/* 모바일 배경 */}
+
+
         {open && (
           <div
             onClick={() => setOpen(false)}
@@ -114,7 +128,8 @@ export default function RootLayout({
               fixed
               inset-0
               bg-black/30
-              z-30
+              z-[80]
+              pointer-events-auto
             "
           />
         )}
@@ -122,17 +137,29 @@ export default function RootLayout({
 
 
 
+
+
+
+        {/* 사이드바 */}
+
+
         <aside
           className={`
+
             fixed
             md:static
+
             top-0
             left-0
             bottom-0
-            z-40
+
+            z-[90]
+            isolate
 
             w-72
             h-screen
+
+            overflow-hidden
 
             border-r
             border-gray-200
@@ -148,11 +175,13 @@ export default function RootLayout({
             transition-transform
             duration-300
 
+
             ${
               open
                 ? "translate-x-0"
                 : "-translate-x-full md:translate-x-0"
             }
+
           `}
         >
 
@@ -170,6 +199,8 @@ export default function RootLayout({
           >
             닫기
           </button>
+
+
 
 
 
@@ -218,12 +249,7 @@ export default function RootLayout({
 
 
             </div>
-
-
-
-
-
-            <div
+                        <div
               className="
                 mb-10
                 flex
@@ -232,10 +258,12 @@ export default function RootLayout({
               "
             >
 
-
-              <img
+              <Image
                 src="/profile.png"
                 alt="profile"
+                width={96}
+                height={96}
+                priority
                 className="
                   w-24
                   h-24
@@ -281,7 +309,11 @@ export default function RootLayout({
 
 
           </div>
-                    <nav className="space-y-3">
+
+
+
+
+          <nav className="space-y-3">
 
 
             <Link
@@ -318,6 +350,7 @@ export default function RootLayout({
             >
               분류
             </p>
+
 
 
 
@@ -368,8 +401,6 @@ export default function RootLayout({
 
 
 
-            {/* 인기글 */}
-
             <p
               className="
                 mt-8
@@ -392,10 +423,6 @@ export default function RootLayout({
 
 
 
-
-            {/* 태그 */}
-
-
             <p
               className="
                 mt-8
@@ -412,6 +439,7 @@ export default function RootLayout({
 
 
 
+
             <div
               className="
                 flex
@@ -420,68 +448,23 @@ export default function RootLayout({
               "
             >
 
-              <span
-                className="
-                  rounded-full
-                  border
-                  border-gray-200
-                  px-3
-                  py-1
-                  text-xs
-                  text-gray-600
-                "
-              >
+              <span className="tag">
                 야구
               </span>
 
-
-              <span
-                className="
-                  rounded-full
-                  border
-                  border-gray-200
-                  px-3
-                  py-1
-                  text-xs
-                  text-gray-600
-                "
-              >
+              <span className="tag">
                 일상
               </span>
 
-
-              <span
-                className="
-                  rounded-full
-                  border
-                  border-gray-200
-                  px-3
-                  py-1
-                  text-xs
-                  text-gray-600
-                "
-              >
+              <span className="tag">
                 미술
               </span>
 
-
-              <span
-                className="
-                  rounded-full
-                  border
-                  border-gray-200
-                  px-3
-                  py-1
-                  text-xs
-                  text-gray-600
-                "
-              >
+              <span className="tag">
                 사진
               </span>
 
-
             </div>
-
 
 
 
@@ -501,11 +484,11 @@ export default function RootLayout({
 
 
 
+
         <main
           className="
             flex-1
             min-h-screen
-            overflow-y-auto
             p-5
             pt-20
             md:p-12
@@ -517,7 +500,6 @@ export default function RootLayout({
           {children}
 
         </main>
-
 
 
 
