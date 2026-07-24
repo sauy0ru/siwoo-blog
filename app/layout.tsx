@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import AuthMenu from "@/components/AuthMenu";
 
 
@@ -29,14 +30,34 @@ export default function RootLayout({
 
   const pathname = usePathname();
 
+  const [open, setOpen] = useState(false);
 
 
-  const linkClass = (path: string) =>
-    `block px-4 py-3 rounded-xl transition ${
-      pathname === path || pathname.startsWith(path + "/")
-        ? "bg-white shadow font-semibold text-black"
-        : "text-gray-600 hover:bg-white/60"
-    }`;
+
+  const linkClass = (path: string) => {
+
+    let active = false;
+
+
+    if (path === "/") {
+      active = pathname === "/";
+    } else {
+      active = pathname.startsWith(path);
+    }
+
+
+    return `
+      block
+      px-3
+      py-2
+      transition
+      ${
+        active
+          ? "text-black font-semibold border-l-2 border-black"
+          : "text-gray-500 hover:text-black"
+      }
+    `;
+  };
 
 
 
@@ -47,38 +68,134 @@ export default function RootLayout({
     >
 
 
-      <body className="min-h-screen flex bg-white">
+      <body className="
+        min-h-screen
+        flex
+        bg-white
+      ">
+
+
+        {/* 모바일 프로필 버튼 */}
+
+        <button
+          onClick={() => setOpen(true)}
+          className="
+            md:hidden
+            fixed
+            top-5
+            left-5
+            z-50
+          "
+        >
+          <img
+            src="/profile.png"
+            alt="profile"
+            className="
+              w-12
+              h-12
+              rounded-full
+              object-cover
+              border
+              border-gray-200
+            "
+          />
+        </button>
+
+
+
+        {/* 모바일 배경 */}
+
+        {open && (
+          <div
+            onClick={() => setOpen(false)}
+            className="
+              md:hidden
+              fixed
+              inset-0
+              bg-black/30
+              z-30
+            "
+          />
+        )}
 
 
 
         {/* 사이드바 */}
-        <aside className="w-72 bg-[#f1f5f9] border-r border-gray-200 p-8 flex flex-col h-screen">
+
+        <aside
+          className={`
+            fixed
+            md:static
+            top-0
+            left-0
+            z-40
+            w-72
+            h-screen
+            border-r
+            border-gray-200
+            bg-white
+            p-8
+            flex
+            flex-col
+            transition-transform
+            duration-300
+
+            ${
+              open
+                ? "translate-x-0"
+                : "-translate-x-full md:translate-x-0"
+            }
+          `}
+        >
+
+
+          <button
+            onClick={() => setOpen(false)}
+            className="
+              md:hidden
+              mb-5
+              text-sm
+              text-gray-500
+              text-left
+            "
+          >
+            닫기
+          </button>
 
 
 
-          {/* 상단 */}
           <div>
 
 
+            <div className="mb-10">
 
-            {/* 타이틀 */}
-            <div className="mb-8 text-center">
-
-
-              <p className="text-xs tracking-[0.35em] text-gray-500 uppercase">
-                personal space
+              <p className="
+                text-xs
+                tracking-[0.35em]
+                text-gray-400
+                uppercase
+              ">
+                personal archive
               </p>
 
 
-              <h1 className="mt-3 text-2xl font-semibold">
+              <h1 className="
+                mt-3
+                text-2xl
+                font-semibold
+                tracking-tight
+              ">
                 crooked shrimp
               </h1>
 
 
-              <p className="mt-2 text-xs text-gray-500">
+              <p className="
+                mt-2
+                text-xs
+                text-gray-400
+              ">
                 art · baseball · photography
               </p>
-
 
             </div>
 
@@ -86,24 +203,26 @@ export default function RootLayout({
 
 
 
-            {/* 프로필 */}
-            <div className="flex flex-col items-center text-center mb-8">
+            <div className="
+              mb-10
+              flex
+              flex-col
+              items-center
+            ">
+
+              <img
+                src="/profile.png"
+                alt="profile"
+                className="
+                  w-24
+                  h-24
+                  rounded-full
+                  object-cover
+                "
+              />
 
 
-              <div className="w-24 h-24 rounded-full overflow-hidden">
-
-
-                <img
-                  src="/profile.png"
-                  alt="profile"
-                  className="w-full h-full object-cover"
-                />
-
-
-              </div>
-
-
-              <p className="mt-3 text-sm">
+              <p className="mt-4 text-sm">
                 꾸부렁새우
               </p>
 
@@ -113,14 +232,10 @@ export default function RootLayout({
 
 
 
-
-
-            {/* 검색 */}
             <form
               action="/search"
-              className="mb-8"
+              className="mb-10"
             >
-
 
               <input
                 type="text"
@@ -128,35 +243,23 @@ export default function RootLayout({
                 placeholder="Search..."
                 className="
                   w-full
-                  rounded-xl
                   border
                   border-gray-200
-                  bg-white
-                  px-4
-                  py-3
+                  px-3
+                  py-2
                   text-sm
                   outline-none
-                  transition
                   focus:border-black
                 "
               />
 
-
             </form>
-
 
 
           </div>
 
-
-
-
-
-
-
-          {/* 메뉴 */}
-          <nav className="space-y-2">
-
+          
+          <nav className="space-y-3">
 
 
             <Link
@@ -170,9 +273,28 @@ export default function RootLayout({
 
 
 
-            <p className="mt-6 mb-2 text-xs tracking-[0.2em] text-gray-500 uppercase">
-              Category
+            <p className="
+              mt-8
+              mb-3
+              text-sm
+              font-semibold
+              tracking-wide
+              text-gray-800
+            ">
+              분류
             </p>
+
+
+
+
+
+            <Link
+              href="/category/all"
+              className={linkClass("/category/all")}
+              onClick={() => setOpen(false)}
+            >
+              전체 게시글
+            </Link>
 
 
 
@@ -181,8 +303,9 @@ export default function RootLayout({
             <Link
               href="/category/야구"
               className={linkClass("/category/야구")}
+              onClick={() => setOpen(false)}
             >
-              ⚾ 야구
+              야구
             </Link>
 
 
@@ -192,8 +315,9 @@ export default function RootLayout({
             <Link
               href="/category/그림"
               className={linkClass("/category/그림")}
+              onClick={() => setOpen(false)}
             >
-              🎨 그림
+              그림
             </Link>
 
 
@@ -203,15 +327,97 @@ export default function RootLayout({
             <Link
               href="/category/사진"
               className={linkClass("/category/사진")}
+              onClick={() => setOpen(false)}
             >
-              📷 사진
+              사진
             </Link>
 
 
 
 
 
-            <div className="mt-6" />
+
+
+            {/* 태그 */}
+
+            <p className="
+              mt-8
+              mb-3
+              text-sm
+              font-semibold
+              tracking-wide
+              text-gray-800
+            ">
+              태그
+            </p>
+
+
+
+            <div className="
+              flex
+              flex-wrap
+              gap-2
+            ">
+
+
+              <span className="
+                rounded-full
+                border
+                border-gray-200
+                px-3
+                py-1
+                text-xs
+                text-gray-600
+              ">
+                야구
+              </span>
+
+
+
+              <span className="
+                rounded-full
+                border
+                border-gray-200
+                px-3
+                py-1
+                text-xs
+                text-gray-600
+              ">
+                일상
+              </span>
+
+
+
+              <span className="
+                rounded-full
+                border
+                border-gray-200
+                px-3
+                py-1
+                text-xs
+                text-gray-600
+              ">
+                미술
+              </span>
+
+
+
+              <span className="
+                rounded-full
+                border
+                border-gray-200
+                px-3
+                py-1
+                text-xs
+                text-gray-600
+              ">
+                사진
+              </span>
+
+
+            </div>
+
+
 
 
 
@@ -220,6 +426,7 @@ export default function RootLayout({
             <Link
               href="/about"
               className={linkClass("/about")}
+              onClick={() => setOpen(false)}
             >
               ABOUT
             </Link>
@@ -228,14 +435,10 @@ export default function RootLayout({
 
 
 
-            {/* 로그인 상태 메뉴 */}
             <AuthMenu />
 
 
-
           </nav>
-
-
 
 
         </aside>
@@ -246,13 +449,19 @@ export default function RootLayout({
 
 
 
+
         {/* 메인 */}
-        <main className="flex-1 p-12 bg-white">
+
+        <main className="
+          flex-1
+          p-5
+          md:p-12
+          bg-white
+        ">
 
           {children}
 
         </main>
-
 
 
 

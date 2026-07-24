@@ -1,37 +1,54 @@
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 
+export const dynamic = "force-dynamic";
+
+
 export default async function Home() {
+
   const { data: posts, error } = await supabase
     .from("posts")
     .select("*")
     .order("created_at", { ascending: false });
 
 
+
   if (error) {
+
     console.error(error);
+
     return (
       <div>
         글을 불러오는 중 오류가 발생했습니다.
       </div>
     );
+
   }
+
 
 
   if (!posts || posts.length === 0) {
+
     return (
       <div className="mx-auto max-w-5xl p-10">
+
         <h1 className="text-3xl font-bold">
           아직 작성된 글이 없습니다.
         </h1>
+
       </div>
     );
+
   }
+
 
 
 
   const latestPost = posts[0];
+
   const otherPosts = posts.slice(1);
+
+
 
 
 
@@ -53,12 +70,16 @@ export default async function Home() {
 
 
 
+
+
+
   return (
 
     <main className="mx-auto max-w-5xl p-10">
 
 
-      {/* 최신 글 */}
+
+      {/* Latest Post */}
 
       <section className="mb-20">
 
@@ -66,6 +87,7 @@ export default async function Home() {
         <p className="text-sm uppercase tracking-[0.3em] text-gray-400">
           Latest Post
         </p>
+
 
 
 
@@ -81,6 +103,7 @@ export default async function Home() {
             hover:-translate-y-2
             hover:shadow-2xl
           ">
+
 
 
             {latestPost.image && (
@@ -103,6 +126,9 @@ export default async function Home() {
 
 
 
+
+
+
             <div className="p-8">
 
 
@@ -114,37 +140,60 @@ export default async function Home() {
                 text-sm
                 text-blue-600
               ">
+
                 {latestPost.category}
+
               </span>
 
 
 
+
+
               <h1 className="mt-5 text-4xl font-bold">
+
                 {latestPost.title}
+
               </h1>
 
 
 
+
+
+
               <p className="mt-4 text-lg text-gray-600">
+
                 {latestPost.description}
+
               </p>
+
+
+
 
 
 
               <p className="mt-5 text-sm text-gray-400">
+
                 {formatDate(latestPost.created_at)}
+
                 {" · "}
+
                 Personal Archive
+
               </p>
+
+
 
 
             </div>
 
 
+
           </article>
 
 
+
         </Link>
+
 
 
       </section>
@@ -153,20 +202,32 @@ export default async function Home() {
 
 
 
-      {/* 최근 글 */}
+
+
+
+
+      {/* Recent Posts */}
 
 
       <section>
 
 
+
         <h2 className="mb-8 text-2xl font-bold">
+
           Recent Posts
+
         </h2>
 
 
 
 
+
+
         <div className="grid gap-8 md:grid-cols-2">
+
+
+
 
 
           {otherPosts.map((post)=>(
@@ -176,6 +237,7 @@ export default async function Home() {
               key={post.id}
               href={`/post/${post.id}`}
             >
+
 
 
               <article className="
@@ -190,21 +252,31 @@ export default async function Home() {
 
 
 
+
+
                 {post.image && (
+
 
                   <div className="bg-gray-50 flex justify-center">
 
+
                     <img
+
                       src={post.image}
+
                       alt={post.title}
+
                       className="
                         h-80
                         w-full
                         object-contain
                       "
+
                     />
 
+
                   </div>
+
 
                 )}
 
@@ -212,7 +284,12 @@ export default async function Home() {
 
 
 
+
+
                 <div className="p-6">
+
+
+
 
 
                   <span className="
@@ -223,51 +300,82 @@ export default async function Home() {
                     text-sm
                     text-blue-600
                   ">
+
                     {post.category}
+
                   </span>
 
 
 
 
+
+
+
                   <h3 className="mt-4 text-2xl font-bold">
+
                     {post.title}
+
                   </h3>
 
 
 
 
+
+
+
                   <p className="mt-3 text-gray-600">
+
                     {post.description}
+
                   </p>
+
+
+
 
 
 
 
                   <p className="mt-4 text-sm text-gray-400">
+
                     {formatDate(post.created_at)}
+
                   </p>
+
+
 
 
 
                 </div>
 
 
+
+
+
               </article>
+
 
 
             </Link>
 
 
+
           ))}
+
+
 
 
         </div>
 
 
+
       </section>
+
+
 
 
     </main>
 
+
   );
+
 }
