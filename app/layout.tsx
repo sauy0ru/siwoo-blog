@@ -68,38 +68,44 @@ export default function RootLayout({
     >
 
 
-      <body className="
-        min-h-screen
-        flex
-        bg-white
-      ">
+      <body
+        className="
+          min-h-screen
+          flex
+          bg-white
+        "
+      >
 
 
         {/* 모바일 프로필 버튼 */}
 
-        <button
-          onClick={() => setOpen(true)}
-          className="
-            md:hidden
-            fixed
-            top-5
-            left-5
-            z-50
-          "
-        >
-          <img
-            src="/profile.png"
-            alt="profile"
+        {!open && (
+          <button
+            onClick={() => setOpen(true)}
             className="
-              w-12
-              h-12
-              rounded-full
-              object-cover
-              border
-              border-gray-200
+              md:hidden
+              fixed
+              top-5
+              left-5
+              z-50
             "
-          />
-        </button>
+          >
+
+            <img
+              src="/profile.png"
+              alt="profile"
+              className="
+                w-12
+                h-12
+                rounded-full
+                object-cover
+                border
+                border-gray-200
+              "
+            />
+
+          </button>
+        )}
 
 
 
@@ -120,6 +126,7 @@ export default function RootLayout({
 
 
 
+
         {/* 사이드바 */}
 
         <aside
@@ -131,6 +138,7 @@ export default function RootLayout({
             z-40
             w-72
             h-screen
+            overflow-y-auto
             border-r
             border-gray-200
             bg-white
@@ -147,6 +155,7 @@ export default function RootLayout({
             }
           `}
         >
+
 
 
           <button
@@ -169,46 +178,54 @@ export default function RootLayout({
 
             <div className="mb-10">
 
-              <p className="
-                text-xs
-                tracking-[0.35em]
-                text-gray-400
-                uppercase
-              ">
+
+              <p
+                className="
+                  text-xs
+                  tracking-[0.35em}
+                  text-gray-400
+                  uppercase
+                "
+              >
                 personal archive
               </p>
 
 
-              <h1 className="
-                mt-3
-                text-2xl
-                font-semibold
-                tracking-tight
-              ">
+              <h1
+                className="
+                  mt-3
+                  text-2xl
+                  font-semibold
+                  tracking-tight
+                "
+              >
                 crooked shrimp
               </h1>
 
 
-              <p className="
-                mt-2
-                text-xs
-                text-gray-400
-              ">
+              <p
+                className="
+                  mt-2
+                  text-xs
+                  text-gray-400
+                "
+              >
                 art · baseball · photography
               </p>
+
 
             </div>
 
 
 
-
-
-            <div className="
-              mb-10
-              flex
-              flex-col
-              items-center
-            ">
+            <div
+              className="
+                mb-10
+                flex
+                flex-col
+                items-center
+              "
+            >
 
               <img
                 src="/profile.png"
@@ -257,14 +274,13 @@ export default function RootLayout({
 
 
           </div>
-
-          
-          <nav className="space-y-3">
+                    <nav className="space-y-3">
 
 
             <Link
               href="/"
               className={linkClass("/")}
+              onClick={() => setOpen(false)}
             >
               HOME
             </Link>
@@ -273,14 +289,16 @@ export default function RootLayout({
 
 
 
-            <p className="
-              mt-8
-              mb-3
-              text-sm
-              font-semibold
-              tracking-wide
-              text-gray-800
-            ">
+            <p
+              className="
+                mt-8
+                mb-3
+                text-sm
+                font-semibold
+                tracking-wide
+                text-gray-800
+              "
+            >
               분류
             </p>
 
@@ -337,86 +355,97 @@ export default function RootLayout({
 
 
 
-
             {/* 태그 */}
 
-            <p className="
-              mt-8
-              mb-3
-              text-sm
-              font-semibold
-              tracking-wide
-              text-gray-800
-            ">
+            <p
+              className="
+                mt-8
+                mb-3
+                text-sm
+                font-semibold
+                tracking-wide
+                text-gray-800
+              "
+            >
               태그
             </p>
 
 
 
-            <div className="
-              flex
-              flex-wrap
-              gap-2
-            ">
+
+            <div
+              className="
+                flex
+                flex-wrap
+                gap-2
+              "
+            >
 
 
-              <span className="
-                rounded-full
-                border
-                border-gray-200
-                px-3
-                py-1
-                text-xs
-                text-gray-600
-              ">
+              <span
+                className="
+                  rounded-full
+                  border
+                  border-gray-200
+                  px-3
+                  py-1
+                  text-xs
+                  text-gray-600
+                "
+              >
                 야구
               </span>
 
 
 
-              <span className="
-                rounded-full
-                border
-                border-gray-200
-                px-3
-                py-1
-                text-xs
-                text-gray-600
-              ">
+              <span
+                className="
+                  rounded-full
+                  border
+                  border-gray-200
+                  px-3
+                  py-1
+                  text-xs
+                  text-gray-600
+                "
+              >
                 일상
               </span>
 
 
 
-              <span className="
-                rounded-full
-                border
-                border-gray-200
-                px-3
-                py-1
-                text-xs
-                text-gray-600
-              ">
+              <span
+                className="
+                  rounded-full
+                  border
+                  border-gray-200
+                  px-3
+                  py-1
+                  text-xs
+                  text-gray-600
+                "
+              >
                 미술
               </span>
 
 
 
-              <span className="
-                rounded-full
-                border
-                border-gray-200
-                px-3
-                py-1
-                text-xs
-                text-gray-600
-              ">
+              <span
+                className="
+                  rounded-full
+                  border
+                  border-gray-200
+                  px-3
+                  py-1
+                  text-xs
+                  text-gray-600
+                "
+              >
                 사진
               </span>
 
 
             </div>
-
 
 
 
@@ -441,8 +470,8 @@ export default function RootLayout({
           </nav>
 
 
-        </aside>
 
+        </aside>
 
 
 
@@ -452,12 +481,14 @@ export default function RootLayout({
 
         {/* 메인 */}
 
-        <main className="
-          flex-1
-          p-5
-          md:p-12
-          bg-white
-        ">
+        <main
+          className="
+            flex-1
+            p-5
+            md:p-12
+            bg-white
+          "
+        >
 
           {children}
 
