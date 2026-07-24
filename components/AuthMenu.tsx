@@ -36,7 +36,6 @@ export default function AuthMenu() {
 
 
 
-    // 로그인 상태 변화 감지
     const {
       data: {
         subscription
@@ -74,6 +73,7 @@ export default function AuthMenu() {
     if(error){
 
       console.error(error);
+
       alert("로그아웃 실패");
 
       return;
@@ -96,6 +96,7 @@ export default function AuthMenu() {
 
 
 
+
   const active =
     pathname === "/login"
       ? "bg-white shadow font-semibold text-black"
@@ -111,12 +112,26 @@ export default function AuthMenu() {
 
     return (
 
-      <div className="space-y-2">
+      <div
+        className="
+          relative
+          z-[200]
+          space-y-2
+        "
+      >
 
 
-        <p className="px-4 py-3 text-sm text-gray-500">
+        <p
+          className="
+            px-4
+            py-3
+            text-sm
+            text-gray-500
+          "
+        >
           {user.email}
         </p>
+
 
 
 
@@ -131,6 +146,7 @@ export default function AuthMenu() {
             rounded-xl
             text-gray-600
             hover:bg-white/60
+            cursor-pointer
           "
         >
           LOGOUT
@@ -150,15 +166,35 @@ export default function AuthMenu() {
 
 
 
+
   return (
 
-    <Link
-      href="/login"
-      className={`block px-4 py-3 rounded-xl transition ${active}`}
+    <div
+      className="
+        relative
+        z-[200]
+      "
     >
-      LOGIN
-    </Link>
+
+      <Link
+        href="/login"
+        className={`
+          block
+          px-4
+          py-3
+          rounded-xl
+          transition
+          cursor-pointer
+          ${active}
+        `}
+      >
+        LOGIN
+      </Link>
+
+
+    </div>
 
   );
+
 
 }
