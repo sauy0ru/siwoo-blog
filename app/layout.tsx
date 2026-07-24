@@ -473,4 +473,4 @@ export default function RootLayout({
 
     </html>
   );
-}git add .
+}
